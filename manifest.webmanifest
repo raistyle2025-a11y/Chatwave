@@ -1,0 +1,9 @@
+{
+  "name": "ChatWave",
+  "short_name": "ChatWave",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#e9edef",
+  "theme_color": "#075e54",
+  "description": "Real-time messaging and calls"
+}

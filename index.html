@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#075e54">
+  <meta name="description" content="ChatWave — private real-time messaging and calls">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+  <title>ChatWave</title>
+</head>
+<body>
+  <main id="app">
+    <section id="authView" class="auth-wrap">
+      <div class="auth-card">
+        <div class="brand-mark">✦</div>
+        <h1>ChatWave</h1>
+        <p class="muted">Messages and calls, together.</p>
+        <div id="signedOut">
+          <label for="phone">Phone number</label>
+          <input id="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel">
+          <div id="recaptcha-container"></div>
+          <button id="sendOtp" class="primary">Send verification code</button>
+          <div id="otpArea" hidden>
+            <label for="otp">Verification code</label>
+            <input id="otp" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code">
+            <button id="verifyOtp" class="primary">Verify and continue</button>
+          </div>
+          <p class="tiny muted">Use a phone number you can receive SMS on. Firebase phone-auth test numbers can be used during development.</p>
+        </div>
+        <div id="authError" class="error" role="alert"></div>
+      </div>
+    </section>
+
+    <section id="mainView" class="layout" hidden>
+      <aside class="sidebar">
+        <header class="side-head">
+          <div><div class="brand-small">✦ ChatWave</div><div id="myPhone" class="tiny muted"></div></div>
+          <button id="signOut" class="icon-btn" title="Sign out">↪</button>
+        </header>
+        <div class="search-wrap"><input id="userSearch" placeholder="Find people by phone…" type="search"></div>
+        <div class="section-label">PEOPLE</div>
+        <div id="usersList" class="people-list"></div>
+        <div class="sidebar-note">Only registered ChatWave users appear here.</div>
+      </aside>
+
+      <section class="conversation">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">✦</div><h2>Your conversations</h2>
+          <p>Choose a person to start chatting or make a call.</p>
+        </div>
+        <div id="chatPanel" class="chat-panel" hidden>
+          <header class="chat-head">
+            <div class="avatar" id="peerAvatar">C</div>
+            <div class="peer-meta"><strong id="peerName">Contact</strong><span id="peerStatus" class="tiny muted">ChatWave user</span></div>
+            <div class="call-actions">
+              <button id="voiceCall" class="icon-btn" title="Voice call">☎</button>
+              <button id="videoCall" class="icon-btn" title="Video call">▣</button>
+            </div>
+          </header>
+          <div id="messages" class="messages"></div>
+          <form id="messageForm" class="composer">
+            <input id="messageInput" maxlength="4000" placeholder="Write a message…" autocomplete="off">
+            <button class="send-btn" type="submit" aria-label="Send">➤</button>
+          </form>
+        </div>
+      </section>
+    </section>
+
+    <section id="callOverlay" class="call-overlay" hidden>
+      <div class="call-card">
+        <div class="call-avatar">✦</div>
+        <h2 id="callTitle">Calling…</h2>
+        <p id="callSubtitle" class="muted">Connecting securely</p>
+        <video id="remoteVideo" autoplay playsinline></video>
+        <video id="localVideo" autoplay muted playsinline></video>
+        <div class="call-controls">
+          <button id="muteCall" class="round-control">🎙</button>
+          <button id="cameraCall" class="round-control">📷</button>
+          <button id="acceptCall" class="round-control accept" hidden>✓</button>
+          <button id="hangupCall" class="round-control hangup">✕</button>
+        </div>
+      </div>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
